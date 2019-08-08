@@ -54,31 +54,31 @@ for (
   test;
   update
 ) {}
-(a = b
+a = b
   ? c
   : function() {
       return 0;
-    }),
-  (a = b
+    },
+  a = b
     ? c
     : function() {
         return 0;
-      }),
-  (a = b
+      },
+  a = b
     ? c
     : function() {
         return 0;
-      }),
-  (a = b
+      },
+  a = b
     ? c
     : function() {
         return 0;
-      }),
-  (a = b
+      },
+  a = b
     ? c
     : function() {
         return 0;
-      });
+      };
 
 ================================================================================
 `;

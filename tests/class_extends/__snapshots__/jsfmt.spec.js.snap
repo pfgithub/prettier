@@ -69,7 +69,7 @@ x = class extends (++b) {}
 class a extends (() => {}) {}
 
 // "AssignmentExpression"
-class a extends (b = c) {}
+class a extends b = c {}
 
 // "AwaitExpression"
 async function f() {

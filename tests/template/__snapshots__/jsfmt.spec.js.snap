@@ -430,7 +430,7 @@ function* f() {
 (() => {})\`\`;
 
 // "AssignmentExpression"
-(b = c)\`\`;
+b = c\`\`;
 
 // "AwaitExpression"
 async function f() {

@@ -154,7 +154,6 @@ function needsParens(path, options) {
     (parent.type === "ClassDeclaration" || parent.type === "ClassExpression") &&
     parent.superClass === node &&
     (node.type === "ArrowFunctionExpression" ||
-      node.type === "AssignmentExpression" ||
       node.type === "AwaitExpression" ||
       node.type === "BinaryExpression" ||
       node.type === "ConditionalExpression" ||
@@ -358,12 +357,6 @@ function needsParens(path, options) {
         case "MemberExpression":
         case "OptionalMemberExpression":
           return name === "object" && parent.object === node;
-
-        case "AssignmentExpression":
-          return (
-            parent.left === node &&
-            (node.type === "TSTypeAssertion" || node.type === "TSAsExpression")
-          );
 
         case "BinaryExpression":
         case "LogicalExpression": {
@@ -572,47 +565,6 @@ function needsParens(path, options) {
         parent.object === node
       );
 
-    case "AssignmentExpression": {
-      const grandParent = path.getParentNode(1);
-
-      if (parent.type === "ArrowFunctionExpression" && parent.body === node) {
-        return true;
-      } else if (
-        parent.type === "ClassProperty" &&
-        parent.key === node &&
-        parent.computed
-      ) {
-        return false;
-      } else if (
-        parent.type === "TSPropertySignature" &&
-        parent.name === node
-      ) {
-        return false;
-      } else if (
-        parent.type === "ForStatement" &&
-        (parent.init === node || parent.update === node)
-      ) {
-        return false;
-      } else if (parent.type === "ExpressionStatement") {
-        return node.left.type === "ObjectPattern";
-      } else if (parent.type === "TSPropertySignature" && parent.key === node) {
-        return false;
-      } else if (parent.type === "AssignmentExpression") {
-        return false;
-      } else if (
-        parent.type === "SequenceExpression" &&
-        grandParent &&
-        grandParent.type === "ForStatement" &&
-        (grandParent.init === parent || grandParent.update === parent)
-      ) {
-        return false;
-      } else if (parent.type === "Property" && parent.value === node) {
-        return false;
-      } else if (parent.type === "NGChainedExpression") {
-        return false;
-      }
-      return true;
-    }
     case "ConditionalExpression":
       switch (parent.type) {
         case "TaggedTemplateExpression":
@@ -743,8 +695,7 @@ function needsParens(path, options) {
           parent.type === "OptionalCallExpression") &&
           parent.arguments[name] === node) ||
         (parent.type === "NGPipeExpression" && name === "right") ||
-        (parent.type === "MemberExpression" && name === "property") ||
-        parent.type === "AssignmentExpression"
+        (parent.type === "MemberExpression" && name === "property")
       ) {
         return false;
       }

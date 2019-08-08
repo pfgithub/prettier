@@ -314,7 +314,7 @@ var b = a = [undefined, null];
 //@noImplicitAny: true
 var a: [any];
 
-var b = (a = [undefined, null]);
+var b = a = [undefined, null];
 
 ================================================================================
 `;
@@ -333,7 +333,7 @@ b = ["", ""];
 =====================================output=====================================
 var a: [any];
 
-var b = (a = [undefined, null]);
+var b = a = [undefined, null];
 b = ["", ""];
 
 ================================================================================
@@ -389,7 +389,7 @@ var foo = function bar() {
 //@noImplicitAny: true
 var foo = function bar() {
   let intermediate: [string];
-  return (intermediate = [undefined]);
+  return intermediate = [undefined];
 };
 
 ================================================================================

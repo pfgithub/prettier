@@ -58,7 +58,7 @@ var Parent = require("./Parent");
 
 // Hops through destructuring
 let ParentFoo;
-({ ParentFoo } = Parent);
+{ ParentFoo } = Parent;
 ParentFoo; // Points to lval in line above this
 
 // Follows assignment on simple/"non-destructuring" patterns

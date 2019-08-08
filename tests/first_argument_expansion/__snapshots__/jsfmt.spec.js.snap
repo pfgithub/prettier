@@ -209,7 +209,7 @@ compose(
 );
 
 somthing.reduce(function(item, thing) {
-  return (thing.blah = item);
+  return thing.blah = item;
 }, {});
 
 somthing.reduce(function(item, thing) {
